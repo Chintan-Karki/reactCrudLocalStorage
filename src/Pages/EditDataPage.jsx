@@ -27,12 +27,10 @@ export default function EditDataPage() {
 
 	return (
 		<section className="flex flex-col justify-center items-center ">
-			<div className="w-3/5 lg:w-3/5">
+			<div className="w-4/5 lg:w-3/5">
 				<div className="my-8 mt-20 font-bold text-2xl w-full">
 					Edit your details
 				</div>
-				{/* </div>
-			<div className="w-3/5 lg:w-3/5"> */}
 				<UserForm userDetail={location.state} />
 			</div>
 		</section>

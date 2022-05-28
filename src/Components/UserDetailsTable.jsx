@@ -1,4 +1,4 @@
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { deleteData, sortData } from "../Store/Slices/userDetailsSlice";
@@ -26,8 +26,8 @@ export default function UserDetailsTable() {
 	}
 
 	return (
-		<div className=" w-full">
-			<table className="table-auto w-full">
+		<div className=" w-full overflow-x-auto overflow-scroll">
+			<table className="table-auto  overflow-x-scroll">
 				<thead className="text-xs font-semibold uppercase text-gray-400 bg-gray-50 ">
 					<tr>
 						<th

@@ -11,7 +11,7 @@ export default function ProfilesPage() {
 				<div className="flex md:flex-row-reverse flex-row w-4/5 lg:w-3/5">
 					<Link
 						to="/"
-						className="transition-all text-xs flex items-center justify-center md:w-fit bg-gray-50 hover:bg-gray-200 hover:text-gray-600 border border-blue-500 rounded-lg h-9 my-5 mt-10 p-4"
+						className="transition-all text-xs  flex items-center justify-center md:w-fit bg-gray-50 hover:bg-gray-200 hover:text-gray-600 border border-blue-500 rounded-lg h-9 my-5 mt-14 p-4"
 					>
 						Return to HomePage
 					</Link>
