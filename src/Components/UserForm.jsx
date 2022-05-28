@@ -14,6 +14,16 @@ export default function UserForm({ userDetail }) {
 	let [countryList, setCountryList] = useState([]);
 	let userData = useSelector((state) => state.userDetails.userData);
 
+	let provinceList = [
+		"Province 01",
+		"Province 02",
+		"Province 03",
+		"Province 04",
+		"Province 05",
+		"Province 06",
+		"Province 07",
+	];
+
 	const {
 		register,
 		formState: { errors },
@@ -32,8 +42,8 @@ export default function UserForm({ userDetail }) {
 			phone: "",
 			province: "",
 			userId: "",
-		}; // result: { firstName: 'test', lastName: 'test2' }
-		reset(result); // asynchronously reset your form values
+		};
+		reset(result);
 	}, [reset]);
 
 	const onSubmit = (data) => {
@@ -45,15 +55,15 @@ export default function UserForm({ userDetail }) {
 		data.userId = uniqId.toString();
 		localStorage.setItem("userData", JSON.stringify([...userData, data]));
 		dispatch(addUserData(data));
-		Swal.fire("Awesome!", "User successfully added", "success");
 		resetAsyncForm();
+		Swal.fire("Awesome!", "User successfully added", "success");
 	};
 
 	const handleDataUpdate = (userId) => (data) => {
 		data.userId = userId;
 		dispatch(updateUserDetails(data));
-		Swal.fire("Awesome!", "User Data successfully updated", "success");
 		resetAsyncForm();
+		Swal.fire("Awesome!", "User Data successfully updated", "success");
 		navigate("/");
 	};
 
@@ -191,13 +201,11 @@ export default function UserForm({ userDetail }) {
 								className=" block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4 pr-10"
 								defaultValue={userDetail && userDetail.province}
 							>
-								<option value="Province 01">Province 01</option>
-								<option value="Province 02">Province 02</option>
-								<option value="Province 03">Province 03</option>
-								<option value="Province 04">Province 04</option>
-								<option value="Province 05">Province 05</option>
-								<option value="Province 06">Province 06</option>
-								<option value="Province 07">Province 07</option>
+								{provinceList.map((province) => (
+									<option value={province} key={province}>
+										{province}
+									</option>
+								))}
 							</select>
 						</div>
 

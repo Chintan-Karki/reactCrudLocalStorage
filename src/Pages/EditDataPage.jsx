@@ -8,7 +8,7 @@ export default function EditDataPage() {
 	if (location.state === null) {
 		return (
 			<section className="flex flex-col justify-center items-center ">
-				<div className="w-3/5 lg:w-3/5">
+				<div className="w-4/5 lg:w-3/5">
 					<div className="my-8 mb-2 mt-20 font-bold text-2xl w-full">
 						Oops! no user found 😅.
 					</div>
