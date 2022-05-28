@@ -88,10 +88,19 @@ export default function UserDetailsTable() {
 											{userDetail.phone}
 										</td>
 										<td className="p-2 pl-4 py-4 text-center w-2/6">
-											{userDetail.city && userDetail.city + " ,"}{" "}
-											{userDetail.district && userDetail.district + " ,"}{" "}
-											{userDetail.province && userDetail.province + " ,"}{" "}
-											{userDetail.country}{" "}
+											{(userDetail.country !== "") |
+												(userDetail.province !== "") |
+												(userDetail.district !== "") |
+												(userDetail.city !== "") && (
+												<>
+													{userDetail.city.trim() !== "" &&
+														userDetail.city + ", "}
+													{userDetail.district.trim() !== "" &&
+														userDetail.district + ", "}
+													{userDetail.province && userDetail.province + ", "}
+													{userDetail.country && userDetail.country}.{" "}
+												</>
+											)}
 										</td>
 										<td className="p-2 pl-4 py-4 text-center">
 											{userDetail.dateOfBirth}

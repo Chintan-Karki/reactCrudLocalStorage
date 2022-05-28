@@ -6,13 +6,11 @@ import {
 	updateUserDetails,
 } from "../Store/Slices/userDetailsSlice";
 import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
 import { provinceList, resetVariables } from "../Services/Constants";
-import ErrorText from './atoms/ErrorText';
+import ErrorText from "./atoms/ErrorText";
 
 export default function UserForm({ userDetail }) {
 	let dispatch = useDispatch();
-	let navigate = useNavigate();
 	let [countryList, setCountryList] = useState([]);
 	let userData = useSelector((state) => state.userDetails.userData);
 
@@ -24,11 +22,14 @@ export default function UserForm({ userDetail }) {
 	} = useForm();
 
 	const resetAsyncForm = useCallback(async () => {
-		const result = resetVariables;
-		reset(result);
+		reset(resetVariables);
 	}, [reset]);
 
 	const onSubmit = (data) => {
+		if (data.name.trim() === "") {
+			Swal.fire("Oops!", "Found an empty input", "error");
+			return;
+		}
 		data.userId =
 			"id" +
 			Math.random().toString(16).slice(2).toString() +
@@ -42,10 +43,14 @@ export default function UserForm({ userDetail }) {
 
 	const handleDataUpdate = (userId) => (data) => {
 		data.userId = userId;
+		if (data.name.trim() === "") {
+			Swal.fire("Oops!", "Found an empty input", "error");
+			return;
+		}
 		dispatch(updateUserDetails(data));
 		resetAsyncForm();
 		Swal.fire("Awesome!", "User Data successfully updated", "success");
-		navigate("/");
+		window.history.go(-1);
 	};
 
 	useEffect(() => {
@@ -85,7 +90,6 @@ export default function UserForm({ userDetail }) {
 					<input
 						placeholder="eg. apple@ball.com"
 						className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
-						// required="required"
 						defaultValue={userDetail && userDetail.email}
 						type="text"
 						name="email"
@@ -113,7 +117,6 @@ export default function UserForm({ userDetail }) {
 					<input
 						placeholder="eg. 9812312345"
 						className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
-						// required="required"
 						defaultValue={userDetail && userDetail.phone}
 						type="number"
 						name="phone"
@@ -253,4 +256,3 @@ export default function UserForm({ userDetail }) {
 		</>
 	);
 }
-

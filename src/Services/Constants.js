@@ -1,13 +1,12 @@
 export const resetVariables = {
 	city: "",
-	country: "",
+	country: "Nepal",
 	dateOfBirth: "",
 	district: "",
 	email: "",
 	name: "",
 	phone: "",
 	province: "",
-	userId: "",
 };
 
 export const provinceList = [
@@ -19,3 +18,4 @@ export const provinceList = [
 	"Province 06",
 	"Province 07",
 ];
+
