@@ -11,7 +11,6 @@ export const userDetails = createSlice({
 		addUserData: (state, action) => {
 			state.userData = [...state.userData, action.payload];
 		},
-
 		sortData: (state, action) => {
 			let sortedArrayAsc = [...state.userData].sort((a, b) =>
 				a.name.localeCompare(b.name)

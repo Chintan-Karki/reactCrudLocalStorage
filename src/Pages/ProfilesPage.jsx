@@ -8,17 +8,17 @@ export default function ProfilesPage() {
 	return (
 		<>
 			<section className="flex justify-center items-center  flex-col ">
-				<div className="flex md:flex-row-reverse flex-row w-4/5 lg:w-3/5">
-					<Link
-						to="/"
-						className="transition-all text-xs  flex items-center justify-center md:w-fit bg-gray-50 hover:bg-gray-200 hover:text-gray-600 border border-blue-500 rounded-lg h-9 my-5 mt-14 p-4"
-					>
-						Return to HomePage
-					</Link>
-				</div>
 				{userData.length !== 0 && (
 					<div className="w-5/6 lg:w-3/5">
-						<h1 className="font-bold text-2xl text-left my-10">Profiles</h1>
+						<div className="flex flex-row justify-between items-center mb-10">
+							<h1 className="font-bold text-4xl text-indigo-900 text-left my-4">Profiles</h1>
+							<Link
+								to="/"
+								className="transition-all text-xs  flex items-center justify-center md:w-fit bg-gray-50 hover:bg-gray-200 hover:text-gray-600 border border-blue-500 rounded-lg h-9 my-4 p-4"
+							>
+								Return to HomePage
+							</Link>
+						</div>
 						<UserDetailsTable />
 					</div>
 				)}

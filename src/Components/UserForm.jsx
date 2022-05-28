@@ -7,22 +7,14 @@ import {
 } from "../Store/Slices/userDetailsSlice";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import { provinceList, resetVariables } from "../Services/Constants";
+import ErrorText from './atoms/ErrorText';
 
 export default function UserForm({ userDetail }) {
 	let dispatch = useDispatch();
 	let navigate = useNavigate();
 	let [countryList, setCountryList] = useState([]);
 	let userData = useSelector((state) => state.userDetails.userData);
-
-	let provinceList = [
-		"Province 01",
-		"Province 02",
-		"Province 03",
-		"Province 04",
-		"Province 05",
-		"Province 06",
-		"Province 07",
-	];
 
 	const {
 		register,
@@ -32,27 +24,16 @@ export default function UserForm({ userDetail }) {
 	} = useForm();
 
 	const resetAsyncForm = useCallback(async () => {
-		const result = {
-			city: "",
-			country: "",
-			dateOfBirth: "",
-			district: "",
-			email: "",
-			name: "",
-			phone: "",
-			province: "",
-			userId: "",
-		};
+		const result = resetVariables;
 		reset(result);
 	}, [reset]);
 
 	const onSubmit = (data) => {
-		let uniqId =
+		data.userId =
 			"id" +
 			Math.random().toString(16).slice(2).toString() +
 			"id" +
-			new Date().getTime();
-		data.userId = uniqId.toString();
+			new Date().getTime().toString();
 		localStorage.setItem("userData", JSON.stringify([...userData, data]));
 		dispatch(addUserData(data));
 		resetAsyncForm();
@@ -136,7 +117,11 @@ export default function UserForm({ userDetail }) {
 						defaultValue={userDetail && userDetail.phone}
 						type="number"
 						name="phone"
-						{...register("phone", { required: true, minLength: 7 })}
+						{...register("phone", {
+							required: true,
+							minLength: 7,
+							maxLength: 14,
+						})}
 					/>
 
 					{errors.phone && <ErrorText text={"Minimum 7 digits required 😅"} />}
@@ -269,10 +254,3 @@ export default function UserForm({ userDetail }) {
 	);
 }
 
-function ErrorText({ text }) {
-	return (
-		<p>
-			<span className="text-orange-700">{text}</span>
-		</p>
-	);
-}
