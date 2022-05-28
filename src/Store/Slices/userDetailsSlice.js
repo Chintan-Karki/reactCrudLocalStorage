@@ -1,9 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-	userData: localStorage.getItem("userData")
-		? JSON.parse(localStorage.getItem("userData"))
-		: [],
+	userData: JSON.parse(localStorage.getItem("userData")) || [],
 };
 
 export const userDetails = createSlice({
@@ -11,27 +9,14 @@ export const userDetails = createSlice({
 	initialState,
 	reducers: {
 		addUserData: (state, action) => {
-            state.userData = [...state.userData, action.payload];
-			localStorage.setItem(
-				"userData",
-				JSON.stringify([...state.userData, action.payload])
-			);
+			state.userData = [...state.userData, action.payload];
 		},
+
 		sortData: (state, action) => {
-			switch (action.payload) {
-				case "asc":
-					state.userData = [...state.userData].sort((a, b) =>
-						a.name.localeCompare(b.name)
-					);
-					break;
-				case "desc":
-					state.userData = [...state.userData].sort((a, b) =>
-						b.name.localeCompare(a.name)
-					);
-					break;
-				default:
-					return;
-			}
+			let sortedArrayAsc = [...state.userData].sort((a, b) =>
+				a.name.localeCompare(b.name)
+			);
+			state.userData = sortedArrayAsc;
 		},
 		deleteData: (state, action) => {
 			let filteredList = [...state.userData].filter(
@@ -40,10 +25,18 @@ export const userDetails = createSlice({
 			localStorage.setItem("userData", JSON.stringify(filteredList));
 			state.userData = filteredList;
 		},
+		updateUserDetails: (state, action) => {
+			const updatedData = [...state.userData].map((x) =>
+				x.userId === action.payload.userId ? (x = action.payload) : x
+			);
+			localStorage.setItem("userData", JSON.stringify(updatedData));
+			state.userData = updatedData;
+		},
 	},
 });
 
 // Action creators are generated for each case reducer function
-export const { addUserData, sortData, deleteData } = userDetails.actions;
+export const { addUserData, sortData, deleteData, updateUserDetails } =
+	userDetails.actions;
 
 export default userDetails.reducer;

@@ -1,71 +1,71 @@
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { deleteData, sortData } from "../Store/Slices/userDetailsSlice";
 
 export default function UserDetailsTable() {
 	let userData = useSelector((state) => state.userDetails.userData);
-	let [sorted, setSorted] = useState("asc");
+
+	let [sorted, setSorted] = useState(false);
 
 	let dispatch = useDispatch();
 
-	useEffect(() => {
-		dispatch(sortData("desc"));
-		setSorted("asc");
-	}, []);
+	function sortingDataByName() {
+		dispatch(sortData(sorted));
+		setSorted(true);
+	}
+
+	function deleteUser(userId) {
+		let filteredList = [...userData].filter((user) => user.userId !== userId);
+		localStorage.setItem("userData", JSON.stringify(filteredList));
+		dispatch(deleteData(userId));
+	}
 
 	if (userData.length === 0) {
 		return null;
 	}
 
-	function sortingDataByName() {
-		dispatch(sortData(sorted));
-		setSorted(sorted === "asc" ? "desc" : "asc");
-	}
-
 	return (
-		<div className="py-20 w-[80%] lg:w-[60%] mt-10 ">
-			<div className="mb-8 font-bold text-2xl">User Details Table</div>
-
-			<table className="table-auto w-full ">
+		<div className=" w-full">
+			<table className="table-auto w-full">
 				<thead className="text-xs font-semibold uppercase text-gray-400 bg-gray-50 ">
 					<tr>
 						<th
-							className="p-2 py-4 cursor-pointer  flex items-center justify-between h-full"
+							className="p-2 py-4 cursor-pointer hover:bg-indigo-50"
 							onClick={sortingDataByName}
 						>
-							<span>Name</span>
-							{sorted === "asc" ? (
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									className="h-5 w-5"
-									viewBox="0 0 20 20"
-									fill="currentColor"
-								>
-									<path
-										fillRule="evenodd"
-										d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z"
-										clipRule="evenodd"
-									/>
-								</svg>
-							) : (
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									className="h-5 w-5"
-									viewBox="0 0 20 20"
-									fill="currentColor"
-								>
-									<path
-										fillRule="evenodd"
-										d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-										clipRule="evenodd"
-									/>
-								</svg>
-							)}
+							<div className="flex items-center justify-between h-full ">
+								<span>Name</span>
+								{sorted ? (
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										className="h-5 w-5"
+										viewBox="0 0 20 20"
+										fill="currentColor"
+									>
+										<path
+											fillRule="evenodd"
+											d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+											clipRule="evenodd"
+										/>
+									</svg>
+								) : (
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										className="h-5 w-5"
+										viewBox="0 0 20 20"
+										fill="currentColor"
+									>
+										<path d="M5 12a1 1 0 102 0V6.414l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L5 6.414V12zM15 8a1 1 0 10-2 0v5.586l-1.293-1.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L15 13.586V8z" />
+									</svg>
+								)}
+							</div>
 						</th>
 						<th className="p-2 py-4">Email</th>
 						<th className="p-2 py-4">Phone</th>
 						<th className="p-2 py-4">Address</th>
 						<th className="p-2 py-4">Date of birth</th>
+						<th className="p-2 py-4"></th>
 						<th className="p-2 py-4"></th>
 					</tr>
 				</thead>
@@ -85,7 +85,7 @@ export default function UserDetailsTable() {
 							<td className="p-2 py-6 text-center">
 								<div
 									className="p-2 flex items-center justify-center rounded-full cursor-pointer hover:bg-orange-700/20 "
-									onClick={() => dispatch(deleteData(userDetail.userId))}
+									onClick={() => deleteUser(userDetail.userId)}
 								>
 									<svg
 										xmlns="http://www.w3.org/2000/svg"
@@ -102,6 +102,28 @@ export default function UserDetailsTable() {
 										/>
 									</svg>
 								</div>
+							</td>
+							<td className="p-2 py-6 text-center">
+								<Link
+									className="p-2 flex items-center justify-center rounded-full cursor-pointer hover:bg-blue-700/10 "
+									to="/edit_detail"
+									state={userDetail}
+								>
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										className="h-6 w-6 text-blue-600"
+										fill="none"
+										viewBox="0 0 24 24"
+										stroke="currentColor"
+										strokeWidth={2}
+									>
+										<path
+											strokeLinecap="round"
+											strokeLinejoin="round"
+											d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+										/>
+									</svg>
+								</Link>
 							</td>
 						</tr>
 					))}
