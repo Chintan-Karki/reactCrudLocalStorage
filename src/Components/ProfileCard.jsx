@@ -20,7 +20,10 @@ export default function ProfileCard({ userDetail }) {
 				<strong>About:</strong>
 			</p>
 			<p className="mb-3 font-normal text-gray-700 text-sm">
-				{firstName} was born on {userDetail.dateOfBirth}.{" "}
+				{userDetail.dateOfBirth !== ""
+					? firstName + " was born on " + userDetail.dateOfBirth
+					: ""}
+
 				{(userDetail.country !== "") |
 					(userDetail.province !== "") |
 					(userDetail.district !== "") |

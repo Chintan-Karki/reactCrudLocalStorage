@@ -103,7 +103,7 @@ export default function UserDetailsTable() {
 											)}
 										</td>
 										<td className="p-2 pl-4 py-4 text-center">
-											{userDetail.dateOfBirth}
+											{userDetail.dateOfBirth !== "" ? userDetail.dateOfBirth : "N/A"}
 										</td>
 										<td className="p-2 pl-4 py-4 text-center">
 											<div
