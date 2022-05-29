@@ -21,7 +21,7 @@ export default function ProfileCard({ userDetail }) {
 			</p>
 			<p className="mb-3 font-normal text-gray-700 text-sm">
 				{userDetail.dateOfBirth !== ""
-					? firstName + " was born on " + userDetail.dateOfBirth
+					? firstName + " was born on " + userDetail.dateOfBirth + ". "
 					: ""}
 
 				{(userDetail.country !== "") |
