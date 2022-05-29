@@ -16,12 +16,12 @@ export default function HomePage() {
 				ref={refForm}
 			>
 				<button
-					className=" absolute top-2 right-0 bg-slate-200 border-2 rounded-md p-2 px-4"
+					className="hidden sm:block absolute top-2 right-0 bg-slate-200 border-2 rounded-md p-2 px-4 w-fit text-xs"
 					onClick={() => refTable.current.scrollIntoView()}
 				>
-					Scroll to table
+					Go to table
 				</button>
-				<div className="my-8 mt-4 font-bold text-2xl">Add your details</div>
+				<div className="my-8 mt-2 font-bold text-lg sm:text-2xl w-5/6 ">Add your details</div>
 				<UserForm />
 			</section>
 
@@ -31,15 +31,16 @@ export default function HomePage() {
 				className="flex flex-col justify-center w-4/5 lg:w-3/5 mt-20"
 			>
 				<UserDetailsTable />
-				<div className="flex flex-row justify-start gap-4 w-4/5 lg:w-3/5 ">
+				<div className="flex flex-row justify-start gap-4  ">
 					<Link
 						to="profiles"
-						className="transition-all flex items-center justify-center w-[80%] md:w-fit bg-gray-50 hover:bg-gray-200 hover:text-gray-600 border border-blue-600 rounded-lg h-12 px-4 my-10"
+						className="transition-all flex items-center justify-center w-1/2 md:w-fit bg-gray-50 hover:bg-slate-200 hover:text-gray-600 border border-blue-600 rounded-lg h-10 px-4 my-10 text-xs md:text-md"
 					>
 						Go to User Profiles
 					</Link>
 					<button
-						className="transition-all flex items-center justify-center w-[80%] md:w-fit bg-gray-50 hover:bg-gray-200 hover:text-gray-600 border border-gray-600/20 rounded-lg h-12 px-4 my-10"
+						className="transition-all flex items-center justify-center w-1/2 md:w-fit bg-gray-50 hover:bg-slate-200 hover:text-gray-600 border rounded-lg h-10 px-4 my-10 text-xs md:text-md"
+						
 						onClick={() => refForm.current.scrollIntoView()}
 					>
 						Add more data

@@ -11,7 +11,7 @@ export default function ProfilesPage() {
 				{userData.length !== 0 ? (
 					<section className="w-4/5 lg:w-3/5">
 						<div className="flex flex-row justify-between items-center mb-10">
-							<h1 className="font-bold text-4xl text-indigo-900 text-left my-4">
+							<h1 className="font-bold text-xl lg:text-4xl text-indigo-900 text-left my-4">
 								Profiles
 							</h1>
 							<Link

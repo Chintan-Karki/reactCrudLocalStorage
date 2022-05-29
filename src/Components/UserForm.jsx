@@ -136,7 +136,7 @@ export default function UserForm({ userDetail }) {
 						Date of Birth
 					</label>
 					<input
-						className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
+						className="appearance-none w-full bg-grey-lighter flex items-center text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
 						type="date"
 						name="dateOfBirth"
 						defaultValue={userDetail && userDetail.dateOfBirth}
@@ -228,17 +228,17 @@ export default function UserForm({ userDetail }) {
 				</div>
 
 				{userDetail ? (
-					<div className="flex flex-row gap-5">
+					<div className="flex flex-row gap-5 mb-2">
 						<button
 							type="button"
-							className="transition block w-full lg:w-1/3 bg-indigo-200 hover:bg-indigo-500 hover:text-gray-50 border border-grey-lighter rounded-lg h-12 px-4"
+							className="transition block w-full md:w-fit hover:bg-indigo-800 bg-indigo-500 text-gray-50 border border-grey-lighter rounded-lg h-12 px-4 lg:px-8 text-sm"
 							onClick={handleSubmit(handleDataUpdate(userDetail.userId))}
 						>
 							Update
 						</button>
 						<button
 							type="button"
-							className="block w-full md:w-fit hover:bg-gray-200 hover:text-gray-700 border border-grey-lighter rounded-lg h-12 px-4"
+							className="block w-full md:w-fit hover:bg-gray-200 hover:text-gray-700 border border-grey-lighter rounded-lg h-12 px-4 text-sm"
 							onClick={() => window.history.go(-1)}
 						>
 							Go back

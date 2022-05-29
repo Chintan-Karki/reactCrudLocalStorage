@@ -1,9 +1,11 @@
-import HomePage from "./Pages/HomePage";
-
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+// pages
+import HomePage from "./Pages/HomePage";
 import ProfilesPage from "./Pages/ProfilesPage";
 import EditDataPage from "./Pages/EditDataPage";
 import Page404 from "./Pages/Page404";
+
+// components
 import Footer from "./Components/Footer";
 import Header from "./Components/Header";
 
